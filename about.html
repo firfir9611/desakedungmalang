@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Pengembang Peta Desa Kedung Malang</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rimba-tua': '#166534', // Hijau Tua Kustom
+                        'rimba-muda': '#4ADE80', // Hijau Muda Kustom
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-900" onload="AOS.init();">
+    <header class="bg-rimba-tua shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="#" class="text-2xl font-bold tracking-wider !text-white">
+                    Desa Kedung Malang
+                </a>
+
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="!text-white hover:text-rimba-muda font-medium transition duration-150">Beranda</a>
+                    <a href="kedungmalang.html" class="!text-white hover:text-rimba-muda font-medium transition duration-150">Jelahahi Peta</a>
+                    <a href="about.html" class="!text-white hover:text-rimba-muda font-medium transition duration-150">Tentang Kami</a>
+                </nav>
+
+                <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-rimba-tua">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-rimba-muda bg-green-700">Beranda</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-green-700">Tentang</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-green-700">Kontak</a>
+            </div>
+        </div>
+    </header>
+    <main class="max-w-4xl mx-auto pt-10 pb-20 px-4 sm:px-6 lg:px-8">
+        <header class="text-center mb-12" data-aos="fade-down">
+            <h1 class="text-5xl font-extrabold text-rimba-tua mb-3">Tentang Proyek Peta Desa</h1>
+            <p class="text-xl text-gray-600">Transparansi data melalui visualisasi spasial modern.</p>
+        </header>
+
+        <section class="mb-12 p-8 bg-white rounded-xl shadow-lg border-l-8 border-rimba-tua" data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-rimba-tua mb-4">Visi & Misi Kami</h2>
+            <p class="text-gray-700 mb-4">
+                Visi kami adalah menciptakan ekosistem data desa yang terintegrasi, transparan, dan mudah diakses oleh seluruh warga dan pemangku kepentingan.
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-gray-700 ml-4">
+                <li>Menyediakan peta infrastruktur dan potensi alam desa secara *real-time*.</li>
+                <li>Mendukung pengambilan keputusan berbasis data spasial.</li>
+                <li>Mempromosikan potensi wisata dan pertanian desa kepada dunia luar.</li>
+            </ul>
+        </section>
+
+        <section class="mb-12" data-aos="fade-right">
+            <h2 class="text-3xl font-bold text-rimba-tua mb-6 text-center">Tim Pengembang</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="bg-green-50 p-6 rounded-xl shadow-md border border-green-200">
+                    <img src="images/profile-pict.png" alt="Nama User" class="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-4 border-rimba-muda">
+                    <h4 class="font-bold text-rimba-tua">Firli Firmansyah A.</h4>
+                    <p class="text-sm text-gray-600">Pengembang GIS</p>
+                </div>
+                <div class="bg-green-50 p-6 rounded-xl shadow-md border border-green-200">
+                    <img src="images/profile-pict.png" alt="Nama User" class="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-4 border-rimba-muda">
+                    <h4 class="font-bold text-rimba-tua">Firli Firmansyah A.</h4>
+                    <p class="text-sm text-gray-600">Pengembang Halaman Web</p>
+                </div>
+                <div class="bg-green-50 p-6 rounded-xl shadow-md border border-green-200">
+                    <img src="images/profile-pict.png" alt="Nama User" class="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-4 border-rimba-muda">
+                    <h4 class="font-bold text-rimba-tua">Firli Firmansyah A.</h4>
+                    <p class="text-sm text-gray-600">Kontributor Data Lapangan</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12 p-8 bg-green-50 rounded-xl shadow-inner border border-green-300" data-aos="fade-left">
+            <h2 class="text-3xl font-bold text-rimba-tua mb-4">Teknologi yang Digunakan</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <p class="font-semibold text-gray-800">Pemetaan Dasar (GIS):</p>
+                <p class="text-gray-700">QGIS (Eksport QGIS2WEB)</p>
+
+                <p class="font-semibold text-gray-800">Basis Peta Interaktif:</p>
+                <p class="text-gray-700">Leaflet.js</p>
+
+                <p class="font-semibold text-gray-800">Desain Antarmuka:</p>
+                <p class="text-gray-700">HTML5, Tailwind CSS (Play CDN)</p>
+
+                <p class="font-semibold text-gray-800">Agen AI:</p>
+                <p class="text-gray-700">Google Gemini</p>
+
+                <p class="font-semibold text-gray-800">Animasi & Interaktivitas:</p>
+                <p class="text-gray-700">AOS (Animate On Scroll) & Custom JS</p>
+            </div>
+        </section>
+
+    </main>
+    <footer class="bg-rimba-tua mt-10">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-white">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-lg font-semibold mb-3">Tentang Desa</h4>
+                    <ul class="space-y-2 text-sm text-green-200">
+                        <li><a href="#" class="hover:text-rimba-muda !text-white">Sejarah</a></li>
+                        <li><a href="#" class="hover:text-rimba-muda !text-white">Potensi Alam</a></li>
+                        <li><a href="#" class="hover:text-rimba-muda !text-white">Galeri</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-3">Bantuan</h4>
+                    <ul class="space-y-2 text-sm text-green-200">
+                        <li><a href="#" class="hover:text-rimba-muda !text-white">FAQ Peta</a></li>
+                        <li><a href="#" class="hover:text-rimba-muda !text-white">Cara Penggunaan</a></li>
+                    </ul>
+                </div>
+                <div class="col-span-2">
+                    <h4 class="text-lg font-semibold mb-3">Sumber Data Peta</h4>
+                    <p class="text-sm text-green-200">
+                        Data diambil dari survei mandiri desa dan diolah oleh Tim IT Desa. Base map menggunakan OpenStreetMap.
+                    </p>
+                </div>
+            </div>
+            <div class="mt-8 pt-4 border-t border-green-700 text-center">
+                <p class="text-sm text-green-200">&copy; 2025 Desa Kedung Malang. Semua Hak Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

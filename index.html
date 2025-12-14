@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desa Kedung Malang</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rimba-tua': '#166534', // Hijau Tua Kustom
+                        'rimba-muda': '#4ADE80', // Hijau Muda Kustom
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-900" onload="AOS.init();">
+    <header class="bg-rimba-tua shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="#" class="text-2xl font-bold tracking-wider !text-white">
+                    Desa Kedung Malang
+                </a>
+
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="!text-white hover:text-rimba-muda font-medium transition duration-150">Beranda</a>
+                    <a href="kedungmalang.html" class="!text-white hover:text-rimba-muda font-medium transition duration-150">Jelahahi Peta</a>
+                    <a href="about.html" class="!text-white hover:text-rimba-muda font-medium transition duration-150">Tentang Kami</a>
+                </nav>
+
+                <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-rimba-tua">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-rimba-muda bg-green-700">Beranda</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-green-700">Tentang</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-green-700">Kontak</a>
+            </div>
+        </div>
+    </header>
+    <main class="max-w-7xl mx-auto pt-4 sm:pt-10 lg:pt-16 px-4 sm:px-6 lg:px-8">
+
+        <section class="text-center py-16 bg-rimba-tua rounded-2xl shadow-xl mb-16" data-aos="fade-up">
+            <h2 class="text-5xl md:text-6xl font-extrabold text-white mb-4 leading-tight">
+                Selamat Datang di <span class="text-rimba-muda">Desa Kedung Malang</span>
+            </h2>
+            <p class="text-xl text-green-200 mb-8 max-w-3xl mx-auto">
+                Jelajahi keindahan alam, kuliner, dan data wilayah kami melalui Peta Digital interaktif.
+            </p>
+            <a href="kedungmalang.html" class="inline-block bg-rimba-muda text-rimba-tua font-bold py-3 px-8 rounded-full shadow-lg hover:bg-white transition duration-300 transform hover:scale-105">
+                Lihat Peta Sekarang →
+            </a>
+        </section>
+
+        <!-- <section id="peta-section" class="py-12">
+            <h3 class="text-3xl font-bold text-rimba-tua text-center mb-10" data-aos="fade-down">
+                🗺️ Peta Digital Desa: Informasi di Ujung Jari Anda
+            </h3>
+
+            <div class="lg:grid lg:grid-cols-3 lg:gap-8" data-aos="fade-up" data-aos-delay="200">
+                <aside class="lg:col-span-1 p-6 bg-white rounded-xl shadow-lg mb-6 lg:mb-0 border border-green-200">
+                    </aside>
+                <section class="lg:col-span-2">
+                    <div id="map" class="w-full rounded-xl shadow-2xl border-4 border-rimba-muda">
+                        </div>
+                </section>
+            </div>
+        </section> -->
+
+        <section class="py-16">
+            <h3 class="text-3xl font-bold text-rimba-tua text-center mb-12" data-aos="fade-up">
+        Potensi Utama Desa Kedung Malang
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-rimba-muda" data-aos="zoom-in" data-aos-delay="100">
+            <div class="text-rimba-tua mb-4">
+                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15H9v-4h2v4zm4 0h-2v-4h2v4zM12 7c-2.76 0-5 2.24-5 5h10c0-2.76-2.24-5-5-5z"/></svg>
+            </div>
+            <h4 class="text-xl font-bold mb-3 text-rimba-tua">Akses Jalan dan Alam Asri</h4>
+            <p class="text-gray-600">
+                Didukung jalanan baru yang mulus dan akses bus yang mudah, desa ini dikelilingi oleh hutan kecil dan sawah yang menjaga keseimbangan ekologis.
+            </p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-rimba-muda" data-aos="zoom-in" data-aos-delay="200">
+            <div class="text-rimba-tua mb-4">
+                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c-4.97 0-9 4.03-9 9 0 4.17 3.4 7.6 7.6 8.44L12 22l1.4-2.56C17.6 18.6 21 15.17 21 11c0-4.97-4.03-9-9-9zm0 14.5c-2.48 0-4.5-2.02-4.5-4.5S9.52 7.5 12 7.5s4.5 2.02 4.5 4.5-2.02 4.5-4.5 4.5z"/></svg>
+            </div>
+            <h4 class="text-xl font-bold mb-3 text-rimba-tua">Pusat Kuliner & Air Bersih</h4>
+            <p class="text-gray-600">
+                Nikmati berbagai kuliner pinggir jalan yang beragam, minuman segar, dan warung kopi. Sungai desa terpisah untuk memancing dan area aman untuk berenang.
+            </p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-rimba-muda" data-aos="zoom-in" data-aos-delay="300">
+            <div class="text-rimba-tua mb-4">
+                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            </div>
+            <h4 class="text-xl font-bold mb-3 text-rimba-tua">Kearifan Lokal & Festival</h4>
+            <p class="text-gray-600">
+                Peta kami membantu melestarikan kearifan lokal dengan menandai lokasi penting. Desa rutin mengadakan festival budaya yang menarik.
+            </p>
+        </div>
+    </div>
+        </section>
+    </main>
+    <footer class="bg-rimba-tua mt-10">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-white">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-lg font-semibold mb-3">Tentang Desa</h4>
+                    <ul class="space-y-2 text-sm text-green-200">
+                        <li><a href="#" class="hover:text-rimba-muda !text-white">Sejarah</a></li>
+                        <li><a href="#" class="hover:text-rimba-muda !text-white">Potensi Alam</a></li>
+                        <li><a href="#" class="hover:text-rimba-muda !text-white">Galeri</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-3">Bantuan</h4>
+                    <ul class="space-y-2 text-sm text-green-200">
+                        <li><a href="#" class="hover:text-rimba-muda !text-white">FAQ Peta</a></li>
+                        <li><a href="#" class="hover:text-rimba-muda !text-white">Cara Penggunaan</a></li>
+                    </ul>
+                </div>
+                <div class="col-span-2">
+                    <h4 class="text-lg font-semibold mb-3">Sumber Data Peta</h4>
+                    <p class="text-sm text-green-200">
+                        Data diambil dari survei mandiri desa dan diolah oleh Tim IT Desa. Base map menggunakan OpenStreetMap.
+                    </p>
+                </div>
+            </div>
+            <div class="mt-8 pt-4 border-t border-green-700 text-center">
+                <p class="text-sm text-green-200">&copy; 2025 Desa Kedung Malang. Semua Hak Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
