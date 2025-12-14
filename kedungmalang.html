@@ -18,11 +18,11 @@
         }
         </script>
     <link rel="stylesheet" href="css/leaflet.css">
-    <link rel="stylesheet" href="css/L.Control.Layers.Tree.css">
-    <link rel="stylesheet" href="css/qgis2web.css">
-    <link rel="stylesheet" href="css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="css/leaflet-search.css">
-    <link rel="stylesheet" href="css/leaflet.photon.css">
+        <link rel="stylesheet" href="css/L.Control.Layers.Tree.css">
+        <link rel="stylesheet" href="css/qgis2web.css">
+        <link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/leaflet.photon.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
     /* Memastikan peta memiliki tinggi yang memadai */
@@ -154,7 +154,7 @@
         
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[-7.410044153400321,109.24401260637687],[-7.384688753400241,109.2866324697478]]);
+        }).fitBounds([[-7.398258521897475,109.24233530393306],[-7.385580821897435,109.26364523561853]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -547,7 +547,8 @@
                         <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(String(feature.properties['id']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['show'] !== null ? autolinker.link(String(feature.properties['show']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <th scope="row">RT</th>\
+                        <td>' + (feature.properties['show'] !== null ? autolinker.link(String(feature.properties['show']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
@@ -874,16 +875,12 @@
         function style_Pendidikan_11_0() {
             return {
                 pane: 'pane_Pendidikan_11',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,158,23,1.0)',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/Pendidikan_11.svg',
+            iconSize: [26.599999999999998, 26.599999999999998]
+        }),
                 interactive: true,
             }
         }
@@ -898,11 +895,21 @@
             pane: 'pane_Pendidikan_11',
             onEachFeature: pop_Pendidikan_11,
             pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.circleMarker(latlng, style_Pendidikan_11_0(feature));
+                // var context = {
+                //     feature: feature,
+                //     variables: {}
+                // };
+                // return L.marker(latlng, style_Pendidikan_11_0(feature));
+                var styleOptions = style_Pendidikan_11_0(feature); // Ambil seluruh objek gaya
+        
+                // Perbaikan: Hanya mengambil properti 'icon', 'rotationAngle', dan 'rotationOrigin' 
+                // yang relevan untuk L.marker dari objek gaya
+                return L.marker(latlng, {
+                    icon: styleOptions.icon,
+                    rotationAngle: styleOptions.rotationAngle,
+                    rotationOrigin: styleOptions.rotationOrigin
+                    // properti 'pane' dan 'interactive' dikelola oleh L.geoJson di atas
+                });
             },
         });
         bounds_group.addLayer(layer_Pendidikan_11);
@@ -930,16 +937,12 @@
         function style_TransportasiUmum_12_0() {
             return {
                 pane: 'pane_TransportasiUmum_12',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(141,90,153,1.0)',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/TransportasiUmum_12.svg',
+            iconSize: [26.599999999999998, 26.599999999999998]
+        }),
                 interactive: true,
             }
         }
@@ -954,11 +957,21 @@
             pane: 'pane_TransportasiUmum_12',
             onEachFeature: pop_TransportasiUmum_12,
             pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.circleMarker(latlng, style_TransportasiUmum_12_0(feature));
+                // var context = {
+                //     feature: feature,
+                //     variables: {}
+                // };
+                // return L.marker(latlng, style_TransportasiUmum_12_0(feature));
+                var styleOptions = style_TransportasiUmum_12_0(feature); // Ambil seluruh objek gaya
+        
+                // Perbaikan: Hanya mengambil properti 'icon', 'rotationAngle', dan 'rotationOrigin' 
+                // yang relevan untuk L.marker dari objek gaya
+                return L.marker(latlng, {
+                    icon: styleOptions.icon,
+                    rotationAngle: styleOptions.rotationAngle,
+                    rotationOrigin: styleOptions.rotationOrigin
+                    // properti 'pane' dan 'interactive' dikelola oleh L.geoJson di atas
+                });
             },
         });
         bounds_group.addLayer(layer_TransportasiUmum_12);
@@ -985,16 +998,12 @@
         function style_TempatMakan_13_0() {
             return {
                 pane: 'pane_TempatMakan_13',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(114,155,111,1.0)',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/TempatMakan_13.svg',
+            iconSize: [26.599999999999998, 26.599999999999998]
+        }),
                 interactive: true,
             }
         }
@@ -1009,11 +1018,21 @@
             pane: 'pane_TempatMakan_13',
             onEachFeature: pop_TempatMakan_13,
             pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.circleMarker(latlng, style_TempatMakan_13_0(feature));
+                // var context = {
+                //     feature: feature,
+                //     variables: {}
+                // };
+                // return L.marker(latlng, style_TempatMakan_13_0(feature));
+                var styleOptions = style_TempatMakan_13_0(feature); // Ambil seluruh objek gaya
+        
+                // Perbaikan: Hanya mengambil properti 'icon', 'rotationAngle', dan 'rotationOrigin' 
+                // yang relevan untuk L.marker dari objek gaya
+                return L.marker(latlng, {
+                    icon: styleOptions.icon,
+                    rotationAngle: styleOptions.rotationAngle,
+                    rotationOrigin: styleOptions.rotationOrigin
+                    // properti 'pane' dan 'interactive' dikelola oleh L.geoJson di atas
+                });
             },
         });
         bounds_group.addLayer(layer_TempatMakan_13);
@@ -1040,16 +1059,12 @@
         function style_FasilitasIbadah_14_0() {
             return {
                 pane: 'pane_FasilitasIbadah_14',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(141,90,153,1.0)',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/FasilitasIbadah_14.svg',
+            iconSize: [26.599999999999998, 26.599999999999998]
+        }),
                 interactive: true,
             }
         }
@@ -1064,11 +1079,21 @@
             pane: 'pane_FasilitasIbadah_14',
             onEachFeature: pop_FasilitasIbadah_14,
             pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.circleMarker(latlng, style_FasilitasIbadah_14_0(feature));
+                // var context = {
+                //     feature: feature,
+                //     variables: {}
+                // };
+                // return L.marker(latlng, style_FasilitasIbadah_14_0(feature));
+                var styleOptions = style_FasilitasIbadah_14_0(feature); // Ambil seluruh objek gaya
+        
+                // Perbaikan: Hanya mengambil properti 'icon', 'rotationAngle', dan 'rotationOrigin' 
+                // yang relevan untuk L.marker dari objek gaya
+                return L.marker(latlng, {
+                    icon: styleOptions.icon,
+                    rotationAngle: styleOptions.rotationAngle,
+                    rotationOrigin: styleOptions.rotationOrigin
+                    // properti 'pane' dan 'interactive' dikelola oleh L.geoJson di atas
+                });
             },
         });
         bounds_group.addLayer(layer_FasilitasIbadah_14);
@@ -1096,16 +1121,12 @@
         function style_Faskes_15_0() {
             return {
                 pane: 'pane_Faskes_15',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(229,182,54,1.0)',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/Faskes_15.svg',
+            iconSize: [26.599999999999998, 26.599999999999998]
+        }),
                 interactive: true,
             }
         }
@@ -1120,11 +1141,21 @@
             pane: 'pane_Faskes_15',
             onEachFeature: pop_Faskes_15,
             pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.circleMarker(latlng, style_Faskes_15_0(feature));
+                // var context = {
+                //     feature: feature,
+                //     variables: {}
+                // };
+                // return L.marker(latlng, style_Faskes_15_0(feature));
+                var styleOptions = style_Faskes_15_0(feature); // Ambil seluruh objek gaya
+        
+                // Perbaikan: Hanya mengambil properti 'icon', 'rotationAngle', dan 'rotationOrigin' 
+                // yang relevan untuk L.marker dari objek gaya
+                return L.marker(latlng, {
+                    icon: styleOptions.icon,
+                    rotationAngle: styleOptions.rotationAngle,
+                    rotationOrigin: styleOptions.rotationOrigin
+                    // properti 'pane' dan 'interactive' dikelola oleh L.geoJson di atas
+                });
             },
         });
         bounds_group.addLayer(layer_Faskes_15);
@@ -1148,16 +1179,12 @@
         function style_RumahPribadi_16_0() {
             return {
                 pane: 'pane_RumahPribadi_16',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(114,155,111,1.0)',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/RumahPribadi_16.svg',
+            iconSize: [26.599999999999998, 26.599999999999998]
+        }),
                 interactive: true,
             }
         }
@@ -1172,11 +1199,21 @@
             pane: 'pane_RumahPribadi_16',
             onEachFeature: pop_RumahPribadi_16,
             pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.circleMarker(latlng, style_RumahPribadi_16_0(feature));
+                // var context = {
+                //     feature: feature,
+                //     variables: {}
+                // };
+                // return L.marker(latlng, style_RumahPribadi_16_0(feature));
+                var styleOptions = style_RumahPribadi_16_0(feature); // Ambil seluruh objek gaya
+        
+                // Perbaikan: Hanya mengambil properti 'icon', 'rotationAngle', dan 'rotationOrigin' 
+                // yang relevan untuk L.marker dari objek gaya
+                return L.marker(latlng, {
+                    icon: styleOptions.icon,
+                    rotationAngle: styleOptions.rotationAngle,
+                    rotationOrigin: styleOptions.rotationOrigin
+                    // properti 'pane' dan 'interactive' dikelola oleh L.geoJson di atas
+                });
             },
         });
         bounds_group.addLayer(layer_RumahPribadi_16);
@@ -1221,11 +1258,22 @@
             pane: 'pane_KantorAdministrasiPemerintahan_17',
             onEachFeature: pop_KantorAdministrasiPemerintahan_17,
             pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.marker(latlng, style_KantorAdministrasiPemerintahan_17_0(feature));
+                // var context = {
+                //     feature: feature,
+                //     variables: {}
+                // };
+                // return L.marker(latlng, style_KantorAdministrasiPemerintahan_17_0(feature));
+
+                var styleOptions = style_KantorAdministrasiPemerintahan_17_0(feature); // Ambil seluruh objek gaya
+        
+                // Perbaikan: Hanya mengambil properti 'icon', 'rotationAngle', dan 'rotationOrigin' 
+                // yang relevan untuk L.marker dari objek gaya
+                return L.marker(latlng, {
+                    icon: styleOptions.icon,
+                    rotationAngle: styleOptions.rotationAngle,
+                    rotationOrigin: styleOptions.rotationOrigin
+                    // properti 'pane' dan 'interactive' dikelola oleh L.geoJson di atas
+                });
             },
         });
         bounds_group.addLayer(layer_KantorAdministrasiPemerintahan_17);
@@ -1503,12 +1551,13 @@
                             "Jalan Kecamatan": { layer: layer_JalanKecamatan_18, group: "Line", active: true, icon: 'legend/JalanKecamatan_18.png' },
 
                             "Kantor Administrasi": { layer: layer_KantorAdministrasiPemerintahan_17, group: "Point", active: true, icon: 'legend/KantorAdministrasiPemerintahan_17.png' },
-                            "Fasilitas Pendidikan": { layer: layer_Faskes_15, group: "Point", active: true, icon: 'legend/Faskes_15.png' },
-                            "Fasilitas Kesehatan": { layer: layer_Pendidikan_11, group: "Point", active: true, icon: 'legend/Pendidikan_11.png' },
-                            "Fasilitas Ibadah": { layer: layer_Pendidikan_11, group: "Point", active: true, icon: 'legend/Pendidikan_11.png' },
+                            "Fasilitas Kesehatan": { layer: layer_Faskes_15, group: "Point", active: true, icon: 'legend/Faskes_15.png' },
+                            "Fasilitas Pendidikan": { layer: layer_Pendidikan_11, group: "Point", active: true, icon: 'legend/Pendidikan_11.png' },
+                            "Fasilitas Ibadah": { layer: layer_FasilitasIbadah_14, group: "Point", active: true, icon: 'legend/FasilitasIbadah_14.png' },
                             "Transportasi Umum": { layer: layer_TransportasiUmum_12, group: "Point", active: true, icon: 'legend/TransportasiUmum_12.png' },
                             "Tempat Makan": { layer: layer_TempatMakan_13, group: "Point", active: true, icon: 'legend/TempatMakan_13.png' },
-
+                            "Rumah Pribadi": { layer: layer_RumahPribadi_16, group: "Point", active: true, icon: 'legend/RumahPribadi_16.png' },
+                            
                             "Batas Bangunan Pribadi": {layer: layer_BatasBangunan_10, group: "Poligon", active: false, icon: 'legend/BatasBangunan_10.png' },
                             "Batas Pemakaman": {layer: layer_BatasPemakaman_9, group: "Poligon", active: true, icon: 'legend/BatasPemakaman_9.png' },
                             "Batas Wilayah RT": {layer: layer_BatasWilayahRT_8, group: "Poligon", active: true, icon: 'legend/BatasWilayahRT_8.png' },
@@ -1519,8 +1568,8 @@
                             "Batas Sawah": { layer: layer_BatasSawah_4, group: "Poligon", active: true, icon: 'legend/BatasSawah_4.png' },
                             "Batas Wilayah Desa": { layer: layer_BatasWilayahKelurahanDesa_2, group: "Poligon", active: true, icon: 'legend/BatasWilayahKelurahanDesa_2.png' },
                             
-                            "Google Maps": { layer: layer_GoogleMaps_1, group: "Penyedia Peta", active: true, icon: '.png' },
-                            "Google Satellite": { layer: layer_GoogleSatellite_0, group: "Penyedia Peta", active: false, icon: '.png' },
+                            "Google Maps": { layer: layer_GoogleMaps_1, group: "Penyedia Peta", active: true, icon: 'legend/google-maps.webp' },
+                            "Google Satellite": { layer: layer_GoogleSatellite_0, group: "Penyedia Peta", active: false, icon: 'legend/google-satellite.png' },
                         }
 
                         function setupSidebarLayerControl() {
