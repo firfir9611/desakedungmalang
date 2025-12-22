@@ -3,7 +3,11 @@
     <head>
         <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jelajahi Peta Kedung Malang</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="titleicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="titleicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="titleicon/favicon-16x16.png">
+    <link rel="manifest" href="titleicon/site.webmanifest">
+    <title>Jelajahi Peta Desa Kedung Malang</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -26,7 +30,23 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
     /* Memastikan peta memiliki tinggi yang memadai */
-    #map { height: 80vh; }
+    #map { height: 95vh; }
+    /* Efek sembunyi untuk sidebar */
+    .sidebar-collapsed {
+        opacity: 0;
+        transform: scale(0.9) translateY(-10px);
+        pointer-events: none;
+        max-height: 0;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Kustomisasi Scrollbar Sidebar agar cantik */
+    #sidebar-content::-webkit-scrollbar { width: 5px; }
+    #sidebar-content::-webkit-scrollbar-thumb { background: #166534; border-radius: 10px; }
+    
+    /* Z-Index Fix untuk Leaflet UI */
+    .leaflet-control-zoom { margin-top: 80px !important; }
     </style>
     </head>
     <body>
@@ -39,8 +59,8 @@
 
                 <nav class="hidden md:flex space-x-8">
                     <a href="index.html" class="!text-white hover:text-rimba-muda font-medium transition duration-150">Beranda</a>
-                    <a href="kedungmalang.html" class="!text-white hover:text-rimba-muda font-medium transition duration-150">Jelahahi Peta</a>
-                    <a href="https://kecamatansumbang.vercel.app/" class="!text-white hover:text-rimba-muda font-medium transition duration-150">Kunjungi Kecamatan</a>
+                    <a href="kedungmalang.html" class="!text-white hover:text-rimba-muda font-medium transition duration-150">Peta Desa</a>
+                    <a href="kecamatan/sumbang.html" class="!text-white hover:text-rimba-muda font-medium transition duration-150">Peta Kecamatan</a>
                     <a href="about.html" class="!text-white hover:text-rimba-muda font-medium transition duration-150">Tentang Kami</a>
                 </nav>
 
@@ -51,75 +71,53 @@
         </div>
         <div id="mobile-menu" class="hidden md:hidden bg-rimba-tua">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-rimba-muda bg-green-700">Beranda</a>
-                <a href="kedungmalang.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-green-700">Jelajahi Peta</a>
-                <a href="https://kecamatansumbang.vercel.app/" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-green-700">Kunjungi Kecamatan</a>
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-green-700">Beranda</a>
+                <a href="kedungmalang.html" class="block px-3 py-2 rounded-md text-base font-medium text-rimba-muda bg-green-700">Peta Desa</a>
+                <a href="kecamatan/sumbang.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-green-700">Peta Kecamatan</a>
                 <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-green-700">Tentang Kami</a>
             </div>
         </div>
     </header>
-    <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-        <div class="lg:grid lg:grid-cols-3 lg:gap-8">
+    <main class="relative w-full h-[calc(100vh-64px)] overflow-hidden">
+    
+    <div id="map" class="absolute inset-0 z-0"></div>
 
-            <!-- <aside class="lg:col-span-1 p-6 bg-white rounded-xl shadow-lg mb-6 lg:mb-0 border border-green-200">
-                <h1 class="text-4xl font-extrabold text-rimba-tua mb-4">Peta Digital Desa</h1>
-                <p class="text-lg text-gray-600 mb-6">
-                    Temukan potensi dan titik penting di Desa Rimba Indah. Data terkini dan mudah diakses.
-                </p>
+    <div id="floating-menu" class="absolute top-4 left-4 z-[999] transition-all duration-300 ease-in-out w-80 max-h-[90%] flex flex-col pointer-events-none">
+        
+        <button id="toggle-sidebar" class="pointer-events-auto bg-rimba-tua text-white p-3 rounded-lg shadow-xl hover:bg-green-700 transition flex items-center justify-between mb-2">
+            <span class="font-bold flex items-center gap-2">
+                <!-- <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-7-7 7-7m8 14l-7-7 7-7"></path></svg> -->
+                Menu Desa
+            </span>
+            <span id="toggle-icon">☰</span>
+        </button>
 
-                <div class="mb-6">
-                    <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Cari Lokasi Spesifik</label>
-                    <input type="text" id="search" placeholder="Contoh: Balai Desa, Sungai" 
-                           class="w-full p-3 border border-green-300 rounded-lg focus:ring-rimba-tua focus:border-rimba-tua">
+        <aside id="sidebar-content" class="pointer-events-auto bg-white/95 backdrop-blur-md rounded-xl shadow-2xl border border-green-200 overflow-y-auto transition-all duration-300 opacity-100 scale-100 origin-top-left p-5">
+            
+            <h1 class="text-2xl font-extrabold text-rimba-tua mb-2">Desa Kedung Malang</h1>
+            <p class="text-sm text-gray-600 mb-6 italic">Temukan potensi dan titik penting di Desa Kedung Malang.</p>
+
+            <div class="mb-6 relative">
+                <div class="flex">
+                    <input type="text" id="sidebar-search-input" placeholder="Contoh: Masjid, SMK, ..." 
+                           class="w-full p-2 text-sm border border-green-300 rounded-l-lg focus:ring-rimba-tua">
+                    <button id="sidebar-search-button" class="bg-rimba-tua text-white p-2 rounded-r-lg">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </button>
                 </div>
-
-                <h3 class="text-xl font-semibold text-rimba-tua mb-3">Lapisan Peta (Layers)</h3>
-                <ul class="space-y-2">
-                    <li>
-                        <input type="checkbox" id="layer-wisata" class="rounded text-rimba-tua focus:ring-rimba-tua" checked>
-                        <label for="layer-wisata" class="ml-2 text-gray-700">Objek Wisata Alam</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" id="layer-fasilitas" class="rounded text-rimba-tua focus:ring-rimba-tua">
-                        <label for="layer-fasilitas" class="ml-2 text-gray-700">Fasilitas Umum</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" id="layer-pertanian" class="rounded text-rimba-tua focus:ring-rimba-tua">
-                        <label for="layer-pertanian" class="ml-2 text-gray-700">Area Pertanian</label>
-                    </li>
-                </ul>
-            </aside> -->
-
-            <aside class="lg:col-span-1 p-6 bg-white rounded-xl shadow-lg mb-6 lg:mb-0 border border-green-200" style="height: 80vh;">
-            <h1 class="text-4xl font-extrabold text-rimba-tua mb-4">Peta Digital Desa</h1>
-            <p class="text-lg text-gray-600 mb-6">
-                Temukan potensi dan titik penting di Desa Kedung Malang.
-            </p>
-
-            <h3 class="text-xl font-semibold text-rimba-tua mb-3 border-t pt-4">Cari Lokasi Spesifik</h3>
-            <div class="mb-6 flex">
-                <input type="text" id="sidebar-search-input" placeholder="Contoh: Sekolah, Tempat Makan" 
-                       class="w-full p-3 border border-green-300 rounded-l-lg focus:ring-rimba-tua focus:border-rimba-tua">
-                <button id="sidebar-search-button" class="bg-rimba-tua text-white p-3 rounded-r-lg hover:bg-green-700 transition">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                </button>
+                <div id="search-results-dropdown" class="relative"></div>
             </div>
-            <div id="search-results-dropdown" class="relative">
-                </div>
-            <div id="search-results" class="mb-6 space-y-2 text-sm max-h-40 overflow-y-auto hidden">
-                </div>
 
-
-            <h3 class="text-xl font-semibold text-rimba-tua mb-3 border-t pt-4">Lapisan Peta (Layers)</h3>
-            <div class="h-96 overflow-y-scroll">
-            <ul id="layer-control-list" class="space-y-3">
+            <h3 class="font-bold text-rimba-tua mb-2 border-t pt-4 text-sm uppercase tracking-wider">Lapisan Peta</h3>
+            <ul id="layer-control-list" class="space-y-2 pb-4 text-sm">
                 </ul>
-            </div>
-            </aside>
+        </aside>
+    </div>
         <section class="lg:col-span-2">
                 <div id="map" class="w-full rounded-xl shadow-2xl border-4 border-rimba-muda">
             <div id="map">
         </div>
+        <script src="https://unpkg.com/@mapbox/polylabel"></script>
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script>
         <script src="js/L.Control.Layers.Tree.min.js"></script>
@@ -1577,6 +1575,7 @@
                         function setupSidebarLayerControl() {
                             const list = document.getElementById('layer-control-list');
 
+                            list.innerHTML = '';
                             // Kelompokkan Layers
                             const groups = {};
                             for (const name in mapLayers) {
@@ -1732,6 +1731,45 @@
                             map.setView(center, 16);
                         }
 
+                        document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.getElementById('toggle-sidebar');
+    const sidebarContent = document.getElementById('sidebar-content');
+    const toggleIcon = document.getElementById('toggle-icon');
+
+    // --- FUNGSI TOGGLE EXPAND/COLLAPSE ---
+    toggleBtn.addEventListener('click', function() {
+        sidebarContent.classList.toggle('sidebar-collapsed');
+        
+        // Ubah icon atau teks saat toggle
+        if (sidebarContent.classList.contains('sidebar-collapsed')) {
+            toggleIcon.innerText = '☰';
+            toggleBtn.classList.add('w-full');
+        } else {
+            toggleIcon.innerText = '✕';
+        }
+    });
+
+    // --- INISIALISASI PENCARIAN & LAYER ---
+    // Panggil fungsi yang sudah kita buat sebelumnya
+    setupSidebarLayerControl();
+    setupSidebarSearchControl();
+});
+
+// Sesuaikan fungsi zoomToAndMark agar menutup sidebar di HP (opsional)
+function zoomToAndMark(layer) {
+    if (searchMarker) map.removeLayer(searchMarker);
+    
+    const center = layer.getBounds ? layer.getBounds().getCenter() : layer.getLatLng();
+    map.setView(center, 17);
+    layer.openPopup();
+
+    // Jika di layar kecil, tutup sidebar otomatis setelah klik hasil cari
+    if (window.innerWidth < 768) {
+        document.getElementById('sidebar-content').classList.add('sidebar-collapsed');
+        document.getElementById('toggle-icon').innerText = '☰';
+    }
+}
+
                         initialZoom();
                         setupSidebarLayerControl();
                         setupSidebarSearchControl();
@@ -1740,7 +1778,7 @@
         </section>    
         </div>
     </main>
-    <footer class="bg-rimba-tua mt-10">
+    <!-- <footer class="bg-rimba-tua mt-10">
         <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-white">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div>
@@ -1769,6 +1807,6 @@
                 <p class="text-sm text-green-200">&copy; 2025 Desa Kedung Malang. Semua Hak Dilindungi.</p>
             </div>
         </div>
-    </footer>    
+    </footer>     -->
     </body>
 </html>
